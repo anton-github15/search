@@ -21,21 +21,22 @@
             document.getElementById("searchForm").submit();
         }
 
-        document.addEventListener("DOMContentLoaded", function() {
-            // Check if user is logged in (you need to implement this logic)
-            if (!isLoggedIn()) {
-                // Redirect to login page
-                window.location.href = "https://www.tohatsu.co.uk/DealerArea/";
-            } else {
-                // User is already logged in, proceed with search
-                let searchTerm = getQueryParam("search");
-                if (searchTerm) {
-                    // Clear the search parameter from the URL
-                    history.replaceState({}, document.title, window.location.pathname);
-                    // Submit the original search term
-                    submitSearch(searchTerm);
-                }
+        // Function to handle login and resume search
+        function loginAndSearch() {
+            let searchTerm = getQueryParam("search");
+            if (searchTerm) {
+                submitSearch(searchTerm);
             }
+        }
+
+        // Example: Trigger login process on click of a login button
+        document.getElementById("loginButton").addEventListener("click", function() {
+            // Simulate login process (replace with actual login logic)
+            // For demonstration, assume login is successful after 2 seconds
+            setTimeout(function() {
+                // Call loginAndSearch() after successful login
+                loginAndSearch();
+            }, 2000); // Adjust timeout as needed or replace with actual login logic
         });
 
         // Function to check if user is logged in (you need to implement this logic)
@@ -44,5 +45,9 @@
             return false; // Replace with your logic to check if user is logged in
         }
     </script>
+
+    <!-- Example: Login button that triggers the login process -->
+    <button id="loginButton">Login</button>
+
 </body>
 </html>
