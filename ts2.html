@@ -21,26 +21,17 @@
             document.getElementById("searchForm").submit();
         }
 
-        // Function to handle login and resume search
-        function loginAndSearch() {
-            let searchTerm = getQueryParam("search");
-            if (searchTerm) {
-                document.getElementById("searchTerm").value = searchTerm;
-                document.getElementById("searchForm").submit();
-            }
-        }
-
         document.addEventListener("DOMContentLoaded", function() {
             // Check if user is logged in (you need to implement this logic)
             if (!isLoggedIn()) {
-                // User is not logged in, show login dialog or modal
-                alert("Please log in to continue."); // Example alert, replace with your modal or dialog
-                // After the user logs in, call loginAndSearch()
-                // Example: showLoginForm(); // Show your custom login form or modal
-                // Upon successful login, call loginAndSearch() to resume search
+                // Redirect to login page
+                window.location.href = "https://www.tohatsu.co.uk/DealerArea/";
             } else {
                 // User is already logged in, proceed with search
-                loginAndSearch();
+                let searchTerm = getQueryParam("search");
+                if (searchTerm) {
+                    submitSearch(searchTerm);
+                }
             }
         });
 
