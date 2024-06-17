@@ -15,13 +15,25 @@
             return urlParams.get(param);
         }
 
-        // Set the search term in the form and submit it
-        function submitSearch() {
-            let searchTerm = getQueryParam("search");
-            if (searchTerm) {
-                document.getElementById("searchTerm").value = searchTerm;
-                document.getElementById("searchForm").submit();
-            }
+        // Function to submit the search
+        function submitSearch(searchTerm) {
+            document.getElementById("searchTerm").value = searchTerm;
+            document.getElementById("searchForm").submit();
+        }
+
+        // Function to handle login
+        function loginAndSearch() {
+            // Redirect to Tohatsu login page
+            window.location.href = "https://www.tohatsu.co.uk/DealerArea/";
+
+            // After successful login, user will likely be redirected back to your page
+            // In that case, resume the search
+            document.addEventListener("DOMContentLoaded", function() {
+                let searchTerm = getQueryParam("search");
+                if (searchTerm) {
+                    submitSearch(searchTerm);
+                }
+            });
         }
 
         // Check if user is logged in (you need to implement this logic)
@@ -32,15 +44,14 @@
 
         document.addEventListener("DOMContentLoaded", function() {
             if (!isLoggedIn()) {
-                // Example: Redirect to login page or show login form
-                alert("Please log in first.");
-                // Example: Redirect to login page
-                window.location.href = "https://www.tohatsu.co.uk/login";
-                // Alternatively, you can show a login form in your page and wait for login
-                // After successful login, call submitSearch() to continue with search
+                // User is not logged in, redirect to login page
+                loginAndSearch();
             } else {
-                // User is logged in, proceed with search
-                submitSearch();
+                // User is already logged in, proceed with search
+                let searchTerm = getQueryParam("search");
+                if (searchTerm) {
+                    submitSearch(searchTerm);
+                }
             }
         });
     </script>
