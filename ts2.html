@@ -16,30 +16,32 @@
             return urlParams.get(param);
         }
 
-        // Check if user is logged in (this is a placeholder and depends on your actual logic)
+        // Placeholder function to check if the user is logged in
         function isLoggedIn() {
-            // This function should return true if the user is logged in, false otherwise
-            // Replace this logic with the actual check
-            return document.cookie.includes("loggedIn=true"); // Example using cookies
+            // This should return true if the user is logged in, false otherwise
+            // Replace this with actual login check logic, e.g., checking a cookie or session
+            return document.cookie.includes("loggedIn=true");
         }
 
-        document.addEventListener("DOMContentLoaded", function() {
+        // Function to handle the search process
+        function handleSearch() {
             let searchTerm = getQueryParam("search");
-            let redirect = getQueryParam("redirect");
-
+            
             if (searchTerm) {
-                if (!isLoggedIn() && !redirect) {
-                    // If not logged in, redirect to login page with the original URL as a parameter
+                if (!isLoggedIn()) {
+                    // If not logged in, redirect to login page with the current URL as a parameter
                     let currentUrl = window.location.href;
                     let loginUrl = "https://www.tohatsu.co.uk/DealerArea/login.php?redirect=" + encodeURIComponent(currentUrl);
                     window.location.href = loginUrl;
                 } else {
-                    // If logged in or coming back from login, proceed with the search
+                    // If already logged in, proceed with the search
                     document.getElementById("searchTerm").value = searchTerm;
                     document.getElementById("searchForm").submit();
                 }
             }
-        });
+        }
+
+        document.addEventListener("DOMContentLoaded", handleSearch);
     </script>
 </body>
 </html>
