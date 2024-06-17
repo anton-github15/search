@@ -2,25 +2,42 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Dial247 Search</title>
+    <title>TS</title>
 </head>
 <body>
-    <form id="searchForm" action="https://www.dial247.co.uk/search" method="get">
-        <input type="text" name="q" id="searchTerm" style="display:none;">
+    <form id="searchForm" action="https://www.tohatsu.co.uk/DealerArea/cart/index.php" method="post">
+        <input type="hidden" name="s" id="searchTerm">
     </form>
+
     <script>
-        // Function to get the query parameter value
+        // Function to get the value of a query parameter by name
         function getQueryParam(param) {
             let urlParams = new URLSearchParams(window.location.search);
             return urlParams.get(param);
         }
 
-        // Set the search term in the form and submit it
+        // Check if user is logged in (this is a placeholder and depends on your actual logic)
+        function isLoggedIn() {
+            // This function should return true if the user is logged in, false otherwise
+            // Replace this logic with the actual check
+            return document.cookie.includes("loggedIn=true"); // Example using cookies
+        }
+
         document.addEventListener("DOMContentLoaded", function() {
             let searchTerm = getQueryParam("search");
+            let redirect = getQueryParam("redirect");
+
             if (searchTerm) {
-                document.getElementById("searchTerm").value = searchTerm;
-                document.getElementById("searchForm").submit();
+                if (!isLoggedIn() && !redirect) {
+                    // If not logged in, redirect to login page with the original URL as a parameter
+                    let currentUrl = window.location.href;
+                    let loginUrl = "https://www.tohatsu.co.uk/DealerArea/login.php?redirect=" + encodeURIComponent(currentUrl);
+                    window.location.href = loginUrl;
+                } else {
+                    // If logged in or coming back from login, proceed with the search
+                    document.getElementById("searchTerm").value = searchTerm;
+                    document.getElementById("searchForm").submit();
+                }
             }
         });
     </script>
