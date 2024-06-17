@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TS</title>
+</head>
+<body>
+    <form id="searchForm" action="https://www.tohatsu.co.uk/DealerArea/cart/index.php" method="post">
+        <input type="hidden" name="s" id="searchTerm">
+    </form>
+    <script>
+        // Function to get the query parameter value
+        function getQueryParam(param) {
+            let urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        // Set the search term in the form and submit it
+        function submitSearch() {
+            let searchTerm = getQueryParam("search");
+            if (searchTerm) {
+                document.getElementById("searchTerm").value = searchTerm;
+                document.getElementById("searchForm").submit();
+            }
+        }
+
+        // Check if user is logged in (you need to implement this logic)
+        function isLoggedIn() {
+            // Example: Check if user is logged in based on your session or cookie logic
+            return false; // Replace with your logic to check if user is logged in
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            if (!isLoggedIn()) {
+                // Example: Redirect to login page or show login form
+                alert("Please log in first.");
+                // Example: Redirect to login page
+                window.location.href = "https://www.tohatsu.co.uk/login";
+                // Alternatively, you can show a login form in your page and wait for login
+                // After successful login, call submitSearch() to continue with search
+            } else {
+                // User is logged in, proceed with search
+                submitSearch();
+            }
+        });
+    </script>
+</body>
+</html>
