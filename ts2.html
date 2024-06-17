@@ -22,24 +22,16 @@
         }
 
         document.addEventListener("DOMContentLoaded", function() {
-            // Example: Wait for user to click the login button after autofill
-            // Replace with your actual login button click event handling
-            document.getElementById("loginButton").addEventListener("click", function() {
-                // After clicking login button, proceed with search
+            // After page load, check if redirected to menu.php after login
+            if (window.location.href.includes("menu.php")) {
+                // Proceed with search
                 let searchTerm = getQueryParam("search");
                 if (searchTerm) {
                     submitSearch(searchTerm);
                 }
-            });
+            }
         });
     </script>
-
-    <!-- Example: Login form (replace with actual form structure) -->
-    <form id="loginForm" action="https://www.tohatsu.co.uk/DealerArea/" method="post">
-        <!-- Assume username and password are filled automatically by the browser -->
-        <!-- Replace with actual autofilled username and password fields -->
-        <button type="button" id="loginButton">Login</button>
-    </form>
 
     <!-- Example: Search form (replace with actual form structure) -->
     <form id="searchForm" action="https://www.tohatsu.co.uk/DealerArea/cart/index.php" method="post">
