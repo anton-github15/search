@@ -2,9 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Search Example</title>
+    <title>Dial247 Search</title>
 </head>
 <body>
+    <form id="searchForm" action="https://www.dial247.co.uk/search" method="get">
+        <input type="text" name="q" id="searchTerm" style="display:none;">
+    </form>
     <script>
         // Function to get the query parameter value
         function getQueryParam(param) {
@@ -12,18 +15,12 @@
             return urlParams.get(param);
         }
 
-        // Function to perform search on the new site
-        function performSearchOnNewSite(searchTerm) {
-            // Replace with actual form and field names from your new site
-            document.LANSA2.ALW3RQ0103.value = searchTerm;
-            PerformSearch('S');
-        }
-
-        // Execute search based on query parameter
+        // Set the search term in the form and submit it
         document.addEventListener("DOMContentLoaded", function() {
             let searchTerm = getQueryParam("search");
             if (searchTerm) {
-                performSearchOnNewSite(searchTerm);
+                document.getElementById("searchTerm").value = searchTerm;
+                document.getElementById("searchForm").submit();
             }
         });
     </script>
