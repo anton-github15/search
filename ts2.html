@@ -21,37 +21,11 @@
             document.getElementById("searchForm").submit();
         }
 
-        // Function to handle login
-        function loginAndSearch() {
-            // Redirect to Tohatsu login page
-            window.location.href = "https://www.tohatsu.co.uk/DealerArea/";
-
-            // After successful login, user will likely be redirected back to your page
-            // In that case, resume the search
-            document.addEventListener("DOMContentLoaded", function() {
-                let searchTerm = getQueryParam("search");
-                if (searchTerm) {
-                    submitSearch(searchTerm);
-                }
-            });
-        }
-
-        // Check if user is logged in (you need to implement this logic)
-        function isLoggedIn() {
-            // Example: Check if user is logged in based on your session or cookie logic
-            return false; // Replace with your logic to check if user is logged in
-        }
-
         document.addEventListener("DOMContentLoaded", function() {
-            if (!isLoggedIn()) {
-                // User is not logged in, redirect to login page
-                loginAndSearch();
-            } else {
-                // User is already logged in, proceed with search
-                let searchTerm = getQueryParam("search");
-                if (searchTerm) {
-                    submitSearch(searchTerm);
-                }
+            let searchTerm = getQueryParam("search");
+            if (searchTerm) {
+                document.getElementById("searchTerm").value = searchTerm;
+                document.getElementById("searchForm").submit();
             }
         });
     </script>
