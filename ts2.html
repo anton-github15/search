@@ -2,40 +2,50 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Login and Search</title>
+    <title>Search Form</title>
 </head>
 <body>
-    <!-- Script to handle search after login -->
+    <form id="searchForm" action="https://dial247.co.uk/CGI-BIN/LANSAWEB?WEBEVENT+L2B9189844005B0018A3E09J+CEL+ENG" method="post">
+        <input type="hidden" name="ALW3CATSHW" value="">
+        <input type="hidden" name="ASTDRENTRY" value="S">
+        <input type="text" name="ALW3RQ0103" id="searchTerm" maxlength="15">
+    </form>
+    
     <script>
-        // Function to get the query parameter value
-        function getQueryParam(param) {
-            let urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get(param);
-        }
+        // Function to perform the search
+        function performSearch() {
+            // Set values for form fields
+            document.getElementById("searchForm").ALW3CATSHW.value = '';
+            document.getElementById("searchForm").ASTDRENTRY.value = 'S';
+            document.getElementById("searchForm").ALW3RQ0103.value = document.getElementById("searchTerm").value;
 
-        // Function to submit the search
-        function submitSearch(searchTerm) {
-            // Set the search term in the form
-            document.getElementById("searchTerm").value = searchTerm;
             // Submit the form
             document.getElementById("searchForm").submit();
         }
 
-        document.addEventListener("DOMContentLoaded", function() {
-            // After page load, check if redirected to menu.php after login
-            if (window.location.href.includes("menu.php")) {
-                // Proceed with search
-                let searchTerm = getQueryParam("search");
-                if (searchTerm) {
-                    submitSearch(searchTerm);
-                }
+        // Function to handle enter key press
+        function handleKeyPress(e) {
+            var keyCode = (e.keyCode ? e.keyCode : e.which);
+            if (keyCode === 13) { // Enter key
+                performSearch();
             }
+        }
+
+        // Set focus on search input on page load
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById("searchTerm").focus();
         });
     </script>
 
-    <!-- Example: Search form (replace with actual form structure) -->
-    <form id="searchForm" action="https://www.tohatsu.co.uk/DealerArea/cart/index.php" method="post">
-        <input type="hidden" name="s" id="searchTerm">
-    </form>
+    <!-- Example: Image link to trigger search -->
+    <table>
+        <tr>
+            <td>
+                <a href="javascript:performSearch()">
+                    <img src="/images/go.gif" alt="Click Here to Search" border="0">
+                </a>
+            </td>
+        </tr>
+    </table>
 </body>
 </html>
