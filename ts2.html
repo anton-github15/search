@@ -2,12 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>TS</title>
+    <title>Login and Search</title>
 </head>
 <body>
-    <form id="searchForm" action="https://www.tohatsu.co.uk/DealerArea/cart/index.php" method="post">
-        <input type="hidden" name="s" id="searchTerm">
-    </form>
+    <!-- Script to handle search after login -->
     <script>
         // Function to get the query parameter value
         function getQueryParam(param) {
@@ -17,37 +15,35 @@
 
         // Function to submit the search
         function submitSearch(searchTerm) {
+            // Set the search term in the form
             document.getElementById("searchTerm").value = searchTerm;
+            // Submit the form
             document.getElementById("searchForm").submit();
         }
 
-        // Function to handle login and resume search
-        function loginAndSearch() {
-            let searchTerm = getQueryParam("search");
-            if (searchTerm) {
-                submitSearch(searchTerm);
-            }
-        }
-
-        // Example: Trigger login process on click of a login button
-        document.getElementById("loginButton").addEventListener("click", function() {
-            // Simulate login process (replace with actual login logic)
-            // For demonstration, assume login is successful after 2 seconds
-            setTimeout(function() {
-                // Call loginAndSearch() after successful login
-                loginAndSearch();
-            }, 2000); // Adjust timeout as needed or replace with actual login logic
+        document.addEventListener("DOMContentLoaded", function() {
+            // Example: Wait for user to click the login button after autofill
+            // Replace with your actual login button click event handling
+            document.getElementById("loginButton").addEventListener("click", function() {
+                // After clicking login button, proceed with search
+                let searchTerm = getQueryParam("search");
+                if (searchTerm) {
+                    submitSearch(searchTerm);
+                }
+            });
         });
-
-        // Function to check if user is logged in (you need to implement this logic)
-        function isLoggedIn() {
-            // Example: Check if user is logged in based on your session or cookie logic
-            return false; // Replace with your logic to check if user is logged in
-        }
     </script>
 
-    <!-- Example: Login button that triggers the login process -->
-    <button id="loginButton">Login</button>
+    <!-- Example: Login form (replace with actual form structure) -->
+    <form id="loginForm" action="https://www.tohatsu.co.uk/DealerArea/" method="post">
+        <!-- Assume username and password are filled automatically by the browser -->
+        <!-- Replace with actual autofilled username and password fields -->
+        <button type="button" id="loginButton">Login</button>
+    </form>
 
+    <!-- Example: Search form (replace with actual form structure) -->
+    <form id="searchForm" action="https://www.tohatsu.co.uk/DealerArea/cart/index.php" method="post">
+        <input type="hidden" name="s" id="searchTerm">
+    </form>
 </body>
 </html>
