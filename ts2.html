@@ -21,14 +21,6 @@
             document.getElementById("searchForm").submit();
         }
 
-        // Function to handle login and resume search
-        function loginAndSearch() {
-            let searchTerm = getQueryParam("search");
-            if (searchTerm) {
-                submitSearch(searchTerm);
-            }
-        }
-
         document.addEventListener("DOMContentLoaded", function() {
             // Check if user is logged in (you need to implement this logic)
             if (!isLoggedIn()) {
@@ -36,7 +28,13 @@
                 window.location.href = "https://www.tohatsu.co.uk/DealerArea/";
             } else {
                 // User is already logged in, proceed with search
-                loginAndSearch();
+                let searchTerm = getQueryParam("search");
+                if (searchTerm) {
+                    // Clear the search parameter from the URL
+                    history.replaceState({}, document.title, window.location.pathname);
+                    // Submit the original search term
+                    submitSearch(searchTerm);
+                }
             }
         });
 
