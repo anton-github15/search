@@ -2,50 +2,30 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Search Form</title>
+    <title>Search Example</title>
 </head>
 <body>
-    <form id="searchForm" action="https://dial247.co.uk/CGI-BIN/LANSAWEB?WEBEVENT+L2B9189844005B0018A3E09J+CEL+ENG" method="post">
-        <input type="hidden" name="ALW3CATSHW" value="">
-        <input type="hidden" name="ASTDRENTRY" value="S">
-        <input type="text" name="ALW3RQ0103" id="searchTerm" maxlength="15">
-    </form>
-    
     <script>
-        // Function to perform the search
-        function performSearch() {
-            // Set values for form fields
-            document.getElementById("searchForm").ALW3CATSHW.value = '';
-            document.getElementById("searchForm").ASTDRENTRY.value = 'S';
-            document.getElementById("searchForm").ALW3RQ0103.value = document.getElementById("searchTerm").value;
-
-            // Submit the form
-            document.getElementById("searchForm").submit();
+        // Function to get the query parameter value
+        function getQueryParam(param) {
+            let urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
         }
 
-        // Function to handle enter key press
-        function handleKeyPress(e) {
-            var keyCode = (e.keyCode ? e.keyCode : e.which);
-            if (keyCode === 13) { // Enter key
-                performSearch();
-            }
+        // Function to perform search on the new site
+        function performSearchOnNewSite(searchTerm) {
+            // Replace with actual form and field names from your new site
+            document.LANSA2.ALW3RQ0103.value = searchTerm;
+            PerformSearch('S');
         }
 
-        // Set focus on search input on page load
+        // Execute search based on query parameter
         document.addEventListener("DOMContentLoaded", function() {
-            document.getElementById("searchTerm").focus();
+            let searchTerm = getQueryParam("search");
+            if (searchTerm) {
+                performSearchOnNewSite(searchTerm);
+            }
         });
     </script>
-
-    <!-- Example: Image link to trigger search -->
-    <table>
-        <tr>
-            <td>
-                <a href="javascript:performSearch()">
-                    <img src="/images/go.gif" alt="Click Here to Search" border="0">
-                </a>
-            </td>
-        </tr>
-    </table>
 </body>
 </html>
