@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TS</title>
+</head>
+<body>
+    <form id="searchForm" action="https://www.dial247.co.uk/CGI-BIN/LANSAWEB?WEBEVENT+L2D1FBF1023E9D701098C02Y+CEL+ENG" method="post">
+        <input type="hidden" name="s" id="searchTerm">
+    </form>
+    <script>
+        // Function to get the query parameter value
+        function getQueryParam(param) {
+            let urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        // Set the search term in the form and submit it
+        document.addEventListener("DOMContentLoaded", function() {
+            let searchTerm = getQueryParam("search");
+            if (searchTerm) {
+                document.getElementById("searchTerm").value = searchTerm;
+                document.getElementById("searchForm").submit();
+            }
+        });
+    </script>
+</body>
+</html>
